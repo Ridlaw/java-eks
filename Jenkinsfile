@@ -4,14 +4,14 @@ pipeline {
         VERSION = "${env.BUILD_ID}"
         AWS_ACCOUNT_ID="971677725738"
         AWS_DEFAULT_REGION="us-east-1"
-        IMAGE_REPO_NAME="jenkins-pipeline"
+        IMAGE_REPO_NAME="jenkins-pipeline-java"
         IMAGE_TAG= "${env.BUILD_ID}"
-        REPOSITORY_URI = "971677725738.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline"
+        REPOSITORY_URI = "971677725738.dkr.ecr.us-east-1.amazonaws.com/jenkins-pipeline-java"
     }
     stages {
         stage('Git checkout') {
             steps {
-                git 'https://github.com/Ridlaw/eks-app.git'
+                git 'https://github.com/Ridlaw/java-eks.git'
             }
         }
         
@@ -71,7 +71,7 @@ pipeline {
                         dir('kubernetes/') {
                           sh 'aws eks update-kubeconfig --name myapp-eks-cluster --region us-east-1'
                           sh """aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"""
-                          sh 'helm upgrade --install --set image.repository="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
+                          sh 'helm upgrade --install --set image.repository="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}" --set image.tag="${VERSION}" myjavaapp-2 myapp/ ' 
 
 
 
