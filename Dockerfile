@@ -1,15 +1,13 @@
+# Use Tomcat as the base image
 FROM tomcat:latest
 
-# Create a new directory for the .war file
-WORKDIR /usr/local/tomcat/webapps
+# Set the working directory
+WORKDIR /usr/local/tomcat
 
-# Copy the .war file from the host machine to the container
-COPY target/SampleWebApp.war .
+# Copy the .war file from the build directory to the webapps directory in Tomcat
+COPY target/*.war /usr/local/tomcat/webapps/
 
-# Remove the default ROOT directory and rename the .war file
-RUN rm -rf ROOT && mv SampleWebApp.war ROOT.war
-
-# Expose port 8080 for the Tomcat server
+# Expose the default Tomcat port
 EXPOSE 8080
 
 # Start Tomcat
