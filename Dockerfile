@@ -5,7 +5,7 @@ FROM tomcat:latest
 WORKDIR /usr/local/tomcat
 
 # Copy the .war file from the build directory to the webapps directory in Tomcat
-COPY target/*.war /usr/local/tomcat/webapps/
+COPY SampleWebApp/target/*.war /usr/local/tomcat/webapps/
 
 # Expose the default Tomcat port
 EXPOSE 8080
