@@ -43,15 +43,16 @@ pipeline {
                  
             }
         }
-      
-          stage('Building image') {
-            steps{
-              script {
-                dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+    
+
+        stage('Building image') {
+              steps{
+                  script{
+                   sh 'docker build . -t ${IMAGE_REPO_NAME}:${IMAGE_TAG}'
+                  }
+              }
         }
-      }
-    }
-        
+
         stage('Pushing to ECR') {
           steps{  
             script {

@@ -5,11 +5,10 @@ FROM tomcat:latest
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy the .war file into the Tomcat webapps directory
-COPY target/SampleWebApp.war /usr/local/tomcat/webapps/ROOT.war
+COPY /SampleWebApp/target/SampleWebApp.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose port 8080 (the default Tomcat port)
 EXPOSE 8080
 
 # Start Tomcat when the container starts
 CMD ["catalina.sh", "run"]
-
