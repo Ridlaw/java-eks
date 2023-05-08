@@ -1,7 +1,14 @@
+# Use Tomcat as the base image
+FROM tomcat:latest
 
-FROM tomcat 
-WORKDIR webapps 
-COPY target/SampleWebApp.war  .
-RUN rm -rf ROOT && mv SampleWebApp.war ROOT.war
+# Set the working directory
+WORKDIR /usr/local/tomcat
+
+# Copy the .war file from the build directory to the webapps directory in Tomcat
+COPY target/*.war /usr/local/tomcat/webapps/
+
+# Expose the default Tomcat port
 EXPOSE 8080
-ENTRYPOINT ["sh", "/usr/local/tomcat/bin/startup.sh"]
+
+# Start Tomcat
+CMD ["catalina.sh", "run"]
