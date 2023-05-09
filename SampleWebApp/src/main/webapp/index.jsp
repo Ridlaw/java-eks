@@ -86,7 +86,7 @@
     <hr>
 
     <footer>
-        <p>&copy; Company 2023</p>
+        <p>&copy; Company 2022</p>
     </footer>
 </div> <!-- /container -->
 
